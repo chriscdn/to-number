@@ -1,15 +1,24 @@
 import { describe, expect, it } from "vitest";
 import {
   ceil,
+  isFloat,
+  isInteger,
   isNumber,
   RoundingMode,
-  toInteger,
   toNumber,
 } from "../src/index";
 
 describe("isNumber", () => {
   it("String(1234)", () => {
     expect(isNumber("1234")).toBe(false);
+  });
+
+  it("isInteger(5.0)", () => {
+    expect(isInteger(5.0)).toBe(true);
+  });
+
+  it("isFloat(5.0)", () => {
+    expect(isFloat(5.0)).toBe(false);
   });
 });
 

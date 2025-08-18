@@ -33,7 +33,7 @@ The `toNumber` function converts an input value to a numeric type. It returns `n
 **Parameters:**
 
 - `input`: The value to convert.
-- `options`: An optional object for rounding configuration:
+- `options`: An optional object for rounding:
   - `RoundingMode` (`NONE`, `FLOOR`, `CEIL`, `ROUND`, default `None`)
   - `digits` (number of decimal places, default `0`)
 
@@ -54,7 +54,7 @@ toNumber("hello123");
 
 ### ceil, floor, round
 
-The `ceil`, `floor`, and `round` functions can adjust numbers to a specific number of decimal places, while JavaScript's `Math.ceil()`, `Math.floor()`, and `Math.round()` always return whole numbers.
+The `ceil`, `floor`, and `round` functions can adjust numbers to a specific number of decimal places (unlike JavaScript's `Math.ceil()`, `Math.floor()`, and `Math.round()` always return whole numbers).
 
 **Example:**
 
@@ -67,7 +67,7 @@ ceil(15.65, { digits: 1 });
 
 ### Type Guards
 
-The library provides an `isFloat`, `isInteger`, and `isNumber` type guard functions.
+The library provides an `isFloat`, `isInteger`, and `isNumber` type guard functions. These functions return `false` for `NaN`, `Infinity`, and `-Infinity`.
 
 **Example:**
 
@@ -75,6 +75,9 @@ The library provides an `isFloat`, `isInteger`, and `isNumber` type guard functi
 import { isFloat, isInteger, isNumber } from "@chriscdn/to-number";
 
 isFloat(45.2);
+// Returns: true
+
+isInteger(5.0);
 // Returns: true
 ```
 
