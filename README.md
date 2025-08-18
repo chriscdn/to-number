@@ -4,11 +4,11 @@ A TypeScript library for numeric conversion and validation.
 
 ## Motivation
 
-This package offers several improvements over directly handling numeric conversions and validations, including:
+This package assists in number parsing, including:
 
-- Returning `null` instead of unexpected numeric values when an input is not a valid number.
-- Providing rounding options.
-- Offering type-checking functions for numeric values.
+- returning `null` instead of `NaN` when a value cannot be converted,
+- rounding options, and
+- offering type-checking functions.
 
 ## Installation
 
@@ -34,13 +34,13 @@ The `toNumber` function converts an input value to a numeric type. It returns `n
 
 - `input`: The value to convert.
 - `options`: An optional object for rounding:
-  - `RoundingMode` (`NONE`, `FLOOR`, `CEIL`, `ROUND`, default `None`)
+  - `roundingMode` (`NONE`, `FLOOR`, `CEIL`, `ROUND`, default `NONE`)
   - `digits` (number of decimal places, default `0`)
 
 **Examples:**
 
 ```ts
-import { toNumber } from "@chriscdn/to-number";
+import { toNumber, RoundingMode } from "@chriscdn/to-number";
 
 toNumber("123.99999", {
   roundingMode: RoundingMode.FLOOR,
@@ -54,7 +54,7 @@ toNumber("hello123");
 
 ### ceil, floor, round
 
-The `ceil`, `floor`, and `round` functions can adjust numbers to a specific number of decimal places (unlike JavaScript's `Math.ceil()`, `Math.floor()`, and `Math.round()` always return whole numbers).
+The `ceil`, `floor`, and `round` functions can adjust numbers to a specific number of decimal places (unlike JavaScript's `Math.ceil()`, `Math.floor()`, and `Math.round()` which always return whole numbers).
 
 **Example:**
 
@@ -67,7 +67,7 @@ ceil(15.65, { digits: 1 });
 
 ### Type Guards
 
-The library provides an `isFloat`, `isInteger`, and `isNumber` type guard functions. These functions return `false` for `NaN`, `Infinity`, and `-Infinity`.
+The library provides `isFloat`, `isInteger`, and `isNumber` type guard functions. These functions return `false` for `NaN`, `Infinity`, and `-Infinity`.
 
 **Example:**
 
