@@ -1,0 +1,32 @@
+{
+  "name": "@chriscdn/to-number",
+  "version": "1.0.0",
+  "description": "A tool for converting values to number.",
+  "repository": "https://github.com/chriscdn/to-number",
+  "author": "Christopher Meyer <chris@schwiiz.org>",
+  "license": "MIT",
+  "type": "module",
+  "source": "./src/index.ts",
+  "exports": {
+    "types": "./lib/index.d.ts",
+    "require": "./lib/to-number.cjs",
+    "default": "./lib/to-number.modern.js"
+  },
+  "main": "./lib/to-number.cjs",
+  "module": "./lib/to-number.module.js",
+  "__unpkg": "./lib/to-number.umd.js",
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "build": "rm -rf ./lib/ && microbundle --format modern,esm,cjs",
+    "dev": "microbundle watch",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "microbundle": "^0.15.1",
+    "vitest": "^3.0.9"
+  },
+  "keywords": [
+    "number",
+    "convert"
+  ]
+}
