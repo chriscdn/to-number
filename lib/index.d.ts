@@ -14,8 +14,8 @@ declare enum RoundingMode {
 declare const toNumber: (input: unknown, options?: {
     roundingMode?: RoundingMode;
     digits?: number;
-}) => number | null;
-declare const toInteger: (input: unknown) => number | null;
+}) => number;
+declare const toInteger: (input: unknown) => number;
 /**
  * Rounds a floating-point number to the specified number of decimal digits.
  *
