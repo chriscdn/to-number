@@ -11,11 +11,14 @@ declare enum RoundingMode {
     CEIL = "ceil",
     ROUND = "round"
 }
-declare const toNumber: (input: unknown, options?: {
+type Options = {
     roundingMode?: RoundingMode;
     digits?: number;
-}) => number;
+};
+declare const toNumber: (input: unknown, options?: Options) => number;
+declare const toNumberOrThrow: (input: unknown, options?: Options) => number;
 declare const toInteger: (input: unknown) => number;
+declare const toIntegerOrThrow: (input: unknown) => number;
 /**
  * Rounds a floating-point number to the specified number of decimal digits.
  *
@@ -59,4 +62,4 @@ declare const isFloat: (value: unknown) => value is number;
  * @returns {value is number} True if the value is a finite number, otherwise false.
  */
 declare const isNumber: (value: unknown) => value is number;
-export { ceil, floor, isFloat, isInteger, isNumber, round, RoundingMode, toInteger, toNumber, };
+export { ceil, floor, isFloat, isInteger, isNumber, round, RoundingMode, toInteger, toIntegerOrThrow, toNumber, toNumberOrThrow, };

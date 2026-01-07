@@ -13,9 +13,14 @@ enum RoundingMode {
   ROUND = "round",
 }
 
+type Options = {
+  roundingMode?: RoundingMode;
+  digits?: number;
+};
+
 const toNumber = (
   input: unknown,
-  options?: { roundingMode?: RoundingMode; digits?: number },
+  options?: Options,
 ) => {
   const roundingMode = options?.roundingMode ?? RoundingMode.NONE;
   const digits = options?.digits ?? 0;
@@ -38,8 +43,28 @@ const toNumber = (
   }
 };
 
+const toNumberOrThrow = (
+  input: unknown,
+  options?: Options,
+) => {
+  const result = toNumber(input, options);
+
+  if (isNumber(result)) {
+    return result;
+  } else {
+    throw new TypeError(`Cannot convert ${input} to number.`);
+  }
+};
+
 const toInteger = (input: unknown) =>
-  toNumber(input, { roundingMode: RoundingMode.FLOOR });
+  toNumber(input, {
+    roundingMode: RoundingMode.FLOOR,
+  });
+
+const toIntegerOrThrow = (input: unknown) =>
+  toNumberOrThrow(input, {
+    roundingMode: RoundingMode.FLOOR,
+  });
 
 /**
  * Rounds a floating-point number to the specified number of decimal digits.
@@ -114,5 +139,7 @@ export {
   round,
   RoundingMode,
   toInteger,
+  toIntegerOrThrow,
   toNumber,
+  toNumberOrThrow,
 };

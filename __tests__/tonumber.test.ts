@@ -5,7 +5,9 @@ import {
   isInteger,
   isNumber,
   RoundingMode,
+  toIntegerOrThrow,
   toNumber,
+  toNumberOrThrow,
 } from "../src/index";
 
 describe("isNumber", () => {
@@ -67,5 +69,19 @@ describe("toNumber", () => {
 describe("ceil", () => {
   it("15.665", () => {
     expect(ceil(15.665, { digits: 2 })).toBe(15.67);
+  });
+});
+
+describe("toNumberOrThrow", () => {
+  it("asdf fail", () => {
+    expect(() => toNumberOrThrow("asdf")).toThrowError(
+      "Cannot convert asdf to number.",
+    );
+  });
+
+  it("asdf fail", () => {
+    expect(() => toIntegerOrThrow("asdf")).toThrowError(
+      "Cannot convert asdf to number.",
+    );
   });
 });
