@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
 import {
   ceil,
-  isFloat,
+  floor,
   isInteger,
   isNumber,
+  round,
   RoundingMode,
   toIntegerOrThrow,
   toNumber,
@@ -19,9 +20,9 @@ describe("isNumber", () => {
     expect(isInteger(5.0)).toBe(true);
   });
 
-  it("isFloat(5.0)", () => {
-    expect(isFloat(5.0)).toBe(false);
-  });
+  // it("isFloat(5.0)", () => {
+  //   expect(isFloat(5.0)).toBe(false);
+  // });
 });
 
 describe("toNumber", () => {
@@ -70,6 +71,18 @@ describe("ceil", () => {
   it("15.665", () => {
     expect(ceil(15.665, { digits: 2 })).toBe(15.67);
   });
+
+  it("decimal digits", () => {
+    expect(() => ceil(15.665, { digits: 2.2 })).toThrowError(
+      "digits must be an integer greater than or equal to zero",
+    );
+  });
+
+  it("negative digits", () => {
+    expect(() => ceil(15.665, { digits: -2 })).toThrowError(
+      "digits must be an integer greater than or equal to zero",
+    );
+  });
 });
 
 describe("toNumberOrThrow", () => {
@@ -83,5 +96,21 @@ describe("toNumberOrThrow", () => {
     expect(() => toIntegerOrThrow("asdf")).toThrowError(
       "Cannot convert asdf to number.",
     );
+  });
+});
+
+/**
+ * The previous multiple by 10^digits and all that created floating point
+ * errors, that would fail these edge cases.
+ */
+describe("Edge Cases", () => {
+  it("round float", () => {
+    expect(round(1.005, { digits: 2 })).toBe(1.01);
+  });
+  it("ceil float", () => {
+    expect(ceil(1.1, { digits: 2 })).toBe(1.1);
+  });
+  it("floor float", () => {
+    expect(floor(0.58, { digits: 2 })).toBe(0.58);
   });
 });

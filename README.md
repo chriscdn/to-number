@@ -67,15 +67,12 @@ ceil(15.65, { digits: 1 });
 
 ### Type Guards
 
-The library provides `isFloat`, `isInteger`, and `isNumber` type guard functions. These functions return `false` for `NaN`, `Infinity`, and `-Infinity`.
+The library provides `isInteger` and `isNumber` type guard functions. These functions return `false` for `NaN`, `Infinity`, and `-Infinity`.
 
 **Example:**
 
 ```ts
-import { isFloat, isInteger, isNumber } from "@chriscdn/to-number";
-
-isFloat(45.2);
-// Returns: true
+import { isInteger, isNumber } from "@chriscdn/to-number";
 
 isInteger(5.0);
 // Returns: true
