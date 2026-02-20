@@ -1,7 +1,7 @@
 {
   "name": "@chriscdn/to-number",
   "version": "1.1.0",
-  "description": "A tool for converting values to number.",
+  "description": "Convert values to numbers.",
   "repository": "https://github.com/chriscdn/to-number",
   "author": "Christopher Meyer <chris@schwiiz.org>",
   "license": "MIT",
