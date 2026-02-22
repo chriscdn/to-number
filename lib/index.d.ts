@@ -21,17 +21,8 @@ type Options = {
     roundingMode?: RoundingMode;
     digits?: number;
 };
-/**
- * Converts an unknown value to a numeric type (integer or float).
- *
- * Non-numeric strings, `NaN`, `Infinity`, and `-Infinity` are considered
- * non-numeric and return `null`.
- *
- * @param {unknown} input - The value to convert
- * @param {Options} [options] - Conversion options
- * @returns {number | null} The numeric value or null if conversion fails
- */
-declare const toNumber: (input: unknown, options?: Options) => number | null;
+declare function toNumber(input: number, options?: Options): number;
+declare function toNumber(input: unknown, options?: Options): number | null;
 /**
  * Converts an unknown value to a numeric type and throws if conversion fails.
  *
