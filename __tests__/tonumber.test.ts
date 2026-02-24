@@ -113,4 +113,8 @@ describe("Edge Cases", () => {
   it("floor float", () => {
     expect(floor(0.58, { digits: 2 })).toBe(0.58);
   });
+
+  it("round 2 float", () => {
+    expect(round(1.275, { digits: 2 })).toBe(1.28);
+  });
 });
