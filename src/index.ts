@@ -25,7 +25,7 @@ type Options = {
 
 function toNumber(input: number, options?: Options): number;
 function toNumber(input: unknown, options?: Options): number | null;
-function toNumber(input: unknown, options?: Options): number | null {
+function toNumber(input: unknown, options?: Options) {
   const roundingMode = options?.roundingMode ?? RoundingMode.NONE;
   const digits = options?.digits ?? 0;
 
@@ -77,7 +77,7 @@ const toNumberOrThrow = (
 
 function toInteger(input: number): number;
 function toInteger(input: unknown): number | null;
-function toInteger(input: unknown): number | null {
+function toInteger(input: unknown) {
   return toNumber(input, {
     roundingMode: RoundingMode.FLOOR,
   });
