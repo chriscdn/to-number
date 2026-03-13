@@ -74,10 +74,14 @@ const toNumberOrThrow = (
  * @param {unknown} input - The value to convert
  * @returns {number | null} The integer value or null if conversion fails
  */
-const toInteger = (input: unknown) =>
-  toNumber(input, {
+
+function toInteger(input: number): number;
+function toInteger(input: unknown): number | null;
+function toInteger(input: unknown): number | null {
+  return toNumber(input, {
     roundingMode: RoundingMode.FLOOR,
   });
+}
 
 /**
  * Converts a value to an integer using floor rounding and throws if conversion fails.

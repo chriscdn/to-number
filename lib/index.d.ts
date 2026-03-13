@@ -38,7 +38,8 @@ declare const toNumberOrThrow: (input: unknown, options?: Options) => number;
  * @param {unknown} input - The value to convert
  * @returns {number | null} The integer value or null if conversion fails
  */
-declare const toInteger: (input: unknown) => number | null;
+declare function toInteger(input: number): number;
+declare function toInteger(input: unknown): number | null;
 /**
  * Converts a value to an integer using floor rounding and throws if conversion fails.
  *
