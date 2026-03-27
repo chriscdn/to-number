@@ -96,14 +96,6 @@ declare const isInteger: (value: unknown) => value is number;
  */
 declare const isPositiveInteger: (value: unknown) => value is number;
 /**
- * Checks if a value is a finite non-integer number.
- *
- * @param {unknown} value - Value to check
- * @returns {value is number} True if value is a finite float, false otherwise
- *
- * removed - Why do we need this if we have isNumber() and isInteger() ?
- */
-/**
  * Checks if a value is a finite number (excludes NaN and Infinity).
  *
  * @param {unknown} value - Value to check

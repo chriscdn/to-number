@@ -48,7 +48,17 @@ describe("toNumber", () => {
 
   it("1234hello", () => {
     const value = toNumber("1234hello");
-    expect(value).toBe(1234);
+    expect(value).toBe(null);
+  });
+
+  it("1e10", () => {
+    const value = toNumber("1e2");
+    expect(value).toBe(100);
+  });
+
+  it("-2e10", () => {
+    const value = toNumber("-2.5e2");
+    expect(value).toBe(-250);
   });
 });
 
@@ -64,6 +74,17 @@ describe("toNumber", () => {
       digits: 2,
     });
     expect(value).toBe(123.99);
+  });
+});
+
+describe("toNumber(boolean)", () => {
+  it("false", () => {
+    const value = toNumber(false);
+    expect(value).toBe(0);
+  });
+  it("true", () => {
+    const value = toNumber(true);
+    expect(value).toBe(1);
   });
 });
 

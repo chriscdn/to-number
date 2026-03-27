@@ -23,13 +23,27 @@ type Options = {
   digits?: number;
 };
 
+const isStrictNumberString = (value: string) =>
+  /^[+-]?(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)?$/.test(value);
+
+const _castToNumber = (value: unknown) => {
+  if (isNumber(value)) {
+    return value;
+  } else if (typeof value === "boolean") {
+    return value ? 1 : 0;
+  } else {
+    const valueAsString = String(value).trim();
+    return isStrictNumberString(valueAsString) ? Number(valueAsString) : null;
+  }
+};
+
 function toNumber(input: number, options?: Options): number;
 function toNumber(input: unknown, options?: Options): number | null;
 function toNumber(input: unknown, options?: Options) {
   const roundingMode = options?.roundingMode ?? RoundingMode.NONE;
   const digits = options?.digits ?? 0;
 
-  const cast = isNumber(input) ? input : parseFloat(String(input));
+  const cast = _castToNumber(input);
 
   if (isNumber(cast)) {
     switch (roundingMode) {
@@ -55,10 +69,7 @@ function toNumber(input: unknown, options?: Options) {
  * @returns {number} The numeric value
  * @throws {TypeError} If the value is NaN, Infinity, or cannot be parsed
  */
-const toNumberOrThrow = (
-  input: unknown,
-  options?: Options,
-) => {
+const toNumberOrThrow = (input: unknown, options?: Options) => {
   const result = toNumber(input, options);
 
   if (isNumber(result)) {
@@ -134,10 +145,8 @@ const withDecimalPrecision = (
  * @param {number} [options.digits=0] - The number of decimal places
  * @returns {number} The rounded number
  */
-const round = (
-  num: number,
-  options: { digits: number } = { digits: 0 },
-) => withDecimalPrecision(num, options, Math.round);
+const round = (num: number, options: { digits: number } = { digits: 0 }) =>
+  withDecimalPrecision(num, options, Math.round);
 
 /**
  * Floors a floating-point number to the specified number of decimal digits.
@@ -147,10 +156,8 @@ const round = (
  * @param {number} [options.digits=0] - The number of decimal places
  * @returns {number} The floored number
  */
-const floor = (
-  num: number,
-  options: { digits: number } = { digits: 0 },
-) => withDecimalPrecision(num, options, Math.floor);
+const floor = (num: number, options: { digits: number } = { digits: 0 }) =>
+  withDecimalPrecision(num, options, Math.floor);
 
 /**
  * Ceils a floating-point number to the specified number of decimal digits.
@@ -160,10 +167,8 @@ const floor = (
  * @param {number} [options.digits=0] - The number of decimal places
  * @returns {number} The ceiled number
  */
-const ceil = (
-  num: number,
-  options: { digits: number } = { digits: 0 },
-) => withDecimalPrecision(num, options, Math.ceil);
+const ceil = (num: number, options: { digits: number } = { digits: 0 }) =>
+  withDecimalPrecision(num, options, Math.ceil);
 
 /**
  * Checks if a value is a finite integer.
@@ -181,21 +186,7 @@ const isInteger = (value: unknown): value is number =>
  * @returns {value is number} True if value is a positive and finite integer, false otherwise
  */
 const isPositiveInteger = (value: unknown): value is number =>
-  isInteger(value) && (value > 0);
-
-/**
- * Checks if a value is a finite non-integer number.
- *
- * @param {unknown} value - Value to check
- * @returns {value is number} True if value is a finite float, false otherwise
- *
- * removed - Why do we need this if we have isNumber() and isInteger() ?
- */
-
-//
-// const isFloat = (value: unknown): value is number =>
-//   typeof value === "number" && !Number.isInteger(value) &&
-//   Number.isFinite(value);
+  isInteger(value) && value > 0;
 
 /**
  * Checks if a value is a finite number (excludes NaN and Infinity).
