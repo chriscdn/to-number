@@ -197,6 +197,15 @@ const isPositiveInteger = (value: unknown): value is number =>
 const isNumber = (value: unknown): value is number =>
   typeof value === "number" && Number.isFinite(value);
 
+const isEven = (num: number): boolean => {
+  if (isInteger(num)) {
+    return num % 2 === 0;
+  } else {
+    throw new Error("num must be an integer");
+  }
+};
+const isOdd = (num: number): boolean => !isEven(num);
+
 export {
   ceil,
   floor,
@@ -209,4 +218,6 @@ export {
   toIntegerOrThrow,
   toNumber,
   toNumberOrThrow,
+  isOdd,
+  isEven,
 };

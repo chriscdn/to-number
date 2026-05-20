@@ -2,8 +2,10 @@ import { describe, expect, it } from "vitest";
 import {
   ceil,
   floor,
+  isEven,
   isInteger,
   isNumber,
+  isOdd,
   round,
   RoundingMode,
   toIntegerOrThrow,
@@ -137,5 +139,22 @@ describe("Edge Cases", () => {
 
   it("round 2 float", () => {
     expect(round(1.275, { digits: 2 })).toBe(1.28);
+  });
+});
+
+describe("Even/Odd", () => {
+  it("even/odd", () => {
+    expect(isEven(2)).toBe(true);
+    expect(isEven(0)).toBe(true);
+    expect(isEven(3)).toBe(false);
+
+    expect(isOdd(2)).toBe(false);
+    expect(isOdd(0)).toBe(false);
+    expect(isOdd(3)).toBe(true);
+  });
+
+  it("invalid", () => {
+    expect(() => isEven(2.5)).toThrow(/num must be an integer/);
+    expect(() => isOdd(-2.5)).toThrow(/num must be an integer/);
   });
 });

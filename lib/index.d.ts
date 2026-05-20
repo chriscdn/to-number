@@ -102,5 +102,7 @@ declare const isPositiveInteger: (value: unknown) => value is number;
  * @returns {value is number} True if value is a finite number, false otherwise
  */
 declare const isNumber: (value: unknown) => value is number;
+declare const isEven: (num: number) => boolean;
+declare const isOdd: (num: number) => boolean;
 
-export { RoundingMode, ceil, floor, isInteger, isNumber, isPositiveInteger, round, toInteger, toIntegerOrThrow, toNumber, toNumberOrThrow };
+export { RoundingMode, ceil, floor, isEven, isInteger, isNumber, isOdd, isPositiveInteger, round, toInteger, toIntegerOrThrow, toNumber, toNumberOrThrow };
