@@ -49,6 +49,7 @@ import { toNumber, RoundingMode } from "@chriscdn/to-number";
 // boolean values
 toNumber(true);
 // Returns: 1
+
 toNumber(false);
 // Returns: 0
 
